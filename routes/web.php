@@ -18,3 +18,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+\Illuminate\Support\Facades\Route::resource('companies', 'CompanyController')->middleware('auth');
