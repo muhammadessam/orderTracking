@@ -19,7 +19,7 @@ class CompanyPlociy
      */
     public function view(User $user, User $model)
     {
-        return $user->email === "admin@admin.com";
+        return true;
     }
 
 

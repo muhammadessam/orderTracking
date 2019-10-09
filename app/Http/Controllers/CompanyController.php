@@ -6,6 +6,7 @@ use App\Company;
 use App\Http\Requests\companyRequest;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
@@ -16,7 +17,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-
+        abort_if(!(Auth::user()->email=="admin@admin.com"), 403);
         $companies = Company::all();
         return view('companies.index', compact('companies'));
     }
