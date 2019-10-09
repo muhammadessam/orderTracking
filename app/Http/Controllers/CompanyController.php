@@ -16,6 +16,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
+
         $companies = Company::all();
         return view('companies.index', compact('companies'));
     }
@@ -106,6 +107,6 @@ class CompanyController extends Controller
     public function storeTag(Company $company, Tag $tag)
     {
         $company->tags()->attach($tag);
-        return back();
+        return redirect(route('companies.show', $company));
     }
 }
