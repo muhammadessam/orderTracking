@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Http\Requests\companyRequest;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -32,7 +33,7 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(companyRequest $request)
@@ -42,13 +43,13 @@ class CompanyController extends Controller
          * it won't enter the method unless the request is valid
          * */
         Company::create($request->all());
-        return  redirect(route('companies.index'));
+        return redirect(route('companies.index'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Company  $company
+     * @param \App\Company $company
      * @return \Illuminate\Http\Response
      */
     public function show(Company $company)
@@ -59,7 +60,7 @@ class CompanyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Company  $company
+     * @param \App\Company $company
      * @return \Illuminate\Http\Response
      */
     public function edit(Company $company)
@@ -70,8 +71,8 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Company  $company
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Company $company
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Company $company)
@@ -83,12 +84,28 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Company  $company
+     * @param \App\Company $company
      * @return \Illuminate\Http\Response
      */
     public function destroy(Company $company)
     {
         $company->delete();
         return redirect(route('companies.index'));
+    }
+
+
+    public function addTags(Company $company)
+    {
+        $tags = Tag::all();
+        return view('tags.create', [
+            'company' => $company,
+            'tags' => $tags
+        ]);
+    }
+
+    public function storeTag(Company $company, Tag $tag)
+    {
+        $company->tags()->attach($tag);
+        return back();
     }
 }

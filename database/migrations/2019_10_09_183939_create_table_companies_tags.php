@@ -13,10 +13,10 @@ class CreateTableCompaniesTags extends Migration
      */
     public function up()
     {
-        Schema::create('companies_tags', function (Blueprint $table) {
+        Schema::create('company_tag', function (Blueprint $table) {
             $table->primary(['company_id','tag_id']);
-            $table->unsignedInteger('company_id');
-            $table->unsignedInteger('tag_id');
+            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('tag_id');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
             $table->timestamps();

@@ -8,4 +8,8 @@ class Tag extends Model
 {
     protected $guarded = [];
 
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
 }

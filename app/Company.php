@@ -12,4 +12,8 @@ class Company extends Model
     public function orders(){
         return $this->hasMany(Order::class);
     }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
 }

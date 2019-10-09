@@ -6,6 +6,7 @@
         <hr class="my-4">
         <p>{{$company->email}}</p>
         <a class="btn btn-primary btn-lg" href="{{route('createOrder',$company)}}" role="button">Add Orders</a>
+        <a class="btn btn-primary btn-lg" href="{{route('createTag',$company)}}" role="button">Add Tags</a>
     </div>
     @if(count($company->orders)>0)
         <h1>Your Orders</h1>
